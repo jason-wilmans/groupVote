@@ -3,16 +3,20 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { VotesComponent } from './votes/votes.component';
+import {VoteService} from "./vote.service";
+import {HttpClient, HttpHandler} from "@angular/common/http";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VotesComponent
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [VoteService, HttpClient, HttpHandler],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
