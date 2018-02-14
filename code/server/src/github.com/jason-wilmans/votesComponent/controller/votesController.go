@@ -22,11 +22,9 @@ func New(repository *repositories.VotesRepository) *VotesController {
 func (this *VotesController) GetAllVotes(writer http.ResponseWriter, request *http.Request) {
 	log.Println("All votes requested.")
 
-	//votes := this.repository.GetAll()
-
-	//log.Println("Currently has ", len(votes), " votes")
-
-	json.NewEncoder(writer).Encode(entities.New("Test?"))
+	votes := this.repository.GetAll()
+	log.Println("Currently has ", len(votes), " votes")
+	json.NewEncoder(writer).Encode(votes)
 }
 
 func (this *VotesController) CreateVote(writer http.ResponseWriter, request *http.Request)  {

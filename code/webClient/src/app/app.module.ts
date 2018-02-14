@@ -1,12 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { VotesComponent } from './votes/votes.component';
 import {VoteService} from "./vote.service";
-import {HttpClient, HttpHandler} from "@angular/common/http";
-
+import {HttpClient, HttpHandler, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -14,9 +12,13 @@ import {HttpClient, HttpHandler} from "@angular/common/http";
     VotesComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [VoteService, HttpClient, HttpHandler],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+
+}
