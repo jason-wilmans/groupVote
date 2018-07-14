@@ -17,7 +17,6 @@ func New() *VotesComponent {
 
 	routeRegistry.Register("/votes", routeRegistry.GET, controller.GetAllVotes)
 	routeRegistry.Register("/votes", routeRegistry.POST, controller.CreateVote)
-	routeRegistry.Register("/test", routeRegistry.GET, controller.Test)
 
 	return &VotesComponent{controller, service}
 }
