@@ -24,9 +24,10 @@ func Register(path string, method int, handler http.HandlerFunc) {
 	precond.NotNil(handler, "")
 	precond.False(HasRoute(path, method), "")
 
-	router.HandleFunc(path, handler)
+	var methodName = convertMethod(method)
+	router.HandleFunc(path, handler).Methods(methodName, "OPTIONS")
 	routeMap[path + strconv.Itoa(method)] = true
-	log.Println("Registered Route: ", path, " (" , method, ")")
+	log.Println("Registered Route: ", path, "(",methodName, ")")
 }
 
 func HasRoute(path string, method int) bool {
@@ -39,4 +40,16 @@ func HasRoute(path string, method int) bool {
 
 func StartHosting()  {
 	log.Fatal(http.ListenAndServe(":8080", router))
+}
+
+func convertMethod(method int) string {
+	precond.InRange(float64(method), GET, DELETE, "Invalid http method value.")
+
+	switch method {
+		case GET: return "GET"
+		case POST: return "POST"
+		case PUT: return "PUT"
+		case DELETE: return "DELETE"
+		default: return ""
+	}
 }
