@@ -48,10 +48,6 @@ func (this *VotesController) CreateVote(writer http.ResponseWriter, request *htt
 }
 
 func (this *VotesController) Test(writer http.ResponseWriter, request *http.Request) {
-	/* Allow CORS*/
-	writer.Header().Set("Access-Control-Allow-Origin", "*")
-	writer.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-
 	writer.Write([]byte("{ \"message\" : \"Hello, world!\" }"))
 	writer.WriteHeader(200)
 }

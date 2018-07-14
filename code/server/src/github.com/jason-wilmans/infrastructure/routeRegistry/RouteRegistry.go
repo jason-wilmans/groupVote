@@ -25,9 +25,18 @@ func Register(path string, method int, handler http.HandlerFunc) {
 	precond.False(HasRoute(path, method), "")
 
 	var methodName = convertMethod(method)
-	router.HandleFunc(path, handler).Methods(methodName, "OPTIONS")
+	router.HandleFunc(path, enableCORS(handler)).Methods(methodName, "OPTIONS")
 	routeMap[path + strconv.Itoa(method)] = true
 	log.Println("Registered Route: ", path, "(",methodName, ")")
+}
+
+func enableCORS(handler http.HandlerFunc) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		
+		handler(w, r)
+	}
 }
 
 func HasRoute(path string, method int) bool {
