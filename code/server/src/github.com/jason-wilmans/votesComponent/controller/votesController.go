@@ -5,44 +5,34 @@ import (
 	"log"
 	"encoding/json"
 	"github.com/jason-wilmans/votesComponent/entities"
-	"github.com/jason-wilmans/votesComponent/repositories"
 	"github.com/muroc/prego"
+	"github.com/jason-wilmans/votesComponent/service"
 )
 
 type VotesController struct {
-	repository *repositories.VotesRepository
+	service *service.VoteService
 }
 
-func New(repository *repositories.VotesRepository) *VotesController {
-	precond.NotNil(repository, "")
+func New(service *service.VoteService) *VotesController {
+	precond.NotNil(service, "")
 
-	return &VotesController{repository}
+	return &VotesController{service}
 }
 
 func (this *VotesController) GetAllVotes(writer http.ResponseWriter, request *http.Request) {
 	log.Println("All votes requested.")
 
-	votes := this.repository.GetAll()
+	votes := this.service.GetAll()
 	log.Println("Currently has ", len(votes), " votes")
 	json.NewEncoder(writer).Encode(votes)
 }
 
 func (this *VotesController) CreateVote(writer http.ResponseWriter, request *http.Request)  {
-	log.Println("Create a vote requested.")
+	log.Println("Save a vote requested.")
 
 	var vote entities.Vote
 	_ = json.NewDecoder(request.Body).Decode(&vote)
 
-	if !vote.IsValid() {
-		writer.WriteHeader(http.StatusBadRequest)
-		writer.Write([]byte("400 - Invalid values"))
-	}
-
-	if this.repository.Exists(vote.GetId()) {
-		writer.WriteHeader(http.StatusBadRequest)
-		writer.Write([]byte("400 - Already exists"))
-	}
-
-	this.repository.AddNew(vote)
+	this.service.Create(vote)
 	writer.WriteHeader(200)
 }

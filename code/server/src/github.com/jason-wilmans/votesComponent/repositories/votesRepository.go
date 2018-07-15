@@ -12,14 +12,11 @@ type VotesRepository struct {
 
 func New() *VotesRepository {
 	var votes []entities.Vote
-	vote := entities.New("Test Vote")
-	votes = append(votes, vote)
 	return &VotesRepository{votes}
 }
 
-func (this *VotesRepository) AddNew(vote entities.Vote) {
+func (this *VotesRepository) Save(vote entities.Vote) {
 	precond.NotNil(vote, "")
-	precond.True(vote.IsValid(), "")
 
 	this.votes = append(this.votes, vote)
 }

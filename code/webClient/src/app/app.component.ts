@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +6,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'app';
-
-  constructor(private http: HttpClient) { }
-
-  ngOnInit() {
-    this.http.get<Object>('http://localhost:8080/test').subscribe(message => {
-      console.log("message: " , message)
-    });
-
-  }
 }

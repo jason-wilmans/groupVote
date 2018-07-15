@@ -14,7 +14,7 @@ func New(name string) Vote {
 	id, _ := uuid.NewV4()
 	vote := Vote{id, name}
 
-	precond.True(vote.IsValid(), "")
+	precond.True(len(name) > 0, "")
 	return vote
 }
 
@@ -29,10 +29,6 @@ func (this *Vote) SetName(name string) {
 	this.Name = name
 }
 
-//func (this *Vote) Name() string {
-//	return this.Name
-//}
-
-func (this *Vote) IsValid() bool {
-	return len(this.Name) > 3
+func (this *Vote) GetName() string {
+	return this.Name
 }
