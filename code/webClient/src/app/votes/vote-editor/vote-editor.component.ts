@@ -25,6 +25,7 @@ export class VoteEditorComponent {
 
     const vote = new Vote(this.Name);
     await this.voteService.Create(vote);
+    this.Name = '';
   }
 
 }
