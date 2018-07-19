@@ -14,4 +14,8 @@ export class Vote {
 
     this.Name = name;
   }
+
+  public get GetName(): string {
+    return this.Name;
+  }
 }

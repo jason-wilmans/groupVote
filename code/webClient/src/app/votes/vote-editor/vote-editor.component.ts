@@ -20,11 +20,10 @@ export class VoteEditorComponent {
     this.Name = "";
   }
 
-  public async Create() {
+  public async OnCreateVoteClicked() {
     contract.In(this.CanCreate).isTrue();
 
     const vote = new Vote(this.Name);
-    console.log('Create called: ', vote);
     await this.voteService.Create(vote);
   }
 

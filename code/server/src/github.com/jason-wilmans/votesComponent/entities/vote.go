@@ -11,11 +11,10 @@ type Vote struct {
 }
 
 func New(name string) Vote {
-	id, _ := uuid.NewV4()
-	vote := Vote{id, name}
-
 	precond.True(len(name) > 0, "")
-	return vote
+
+	id, _ := uuid.NewV4()
+	return Vote{id, name}
 }
 
 func (this *Vote) GetId() uuid.UUID {
