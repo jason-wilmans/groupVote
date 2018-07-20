@@ -8,6 +8,9 @@ import (
 	"github.com/muroc/prego"
 	"github.com/jason-wilmans/infrastructure/routeRegistry"
 	"github.com/jason-wilmans/votesComponent"
+	"github.com/gorilla/mux"
+	"fmt"
+	"github.com/jason-wilmans/infrastructure/goExtensions"
 )
 
 type VotesController struct {
@@ -30,7 +33,7 @@ func (this *VotesController) GetAllVotes(writer http.ResponseWriter, request *ht
 	json.NewEncoder(writer).Encode(votes)
 }
 
-func (this *VotesController) CreateVote(writer http.ResponseWriter, request *http.Request)  {
+func (this *VotesController) CreateVote(writer http.ResponseWriter, request *http.Request) {
 	log.Println("Save a vote requested.")
 
 	var vote domainObjects.Vote
@@ -40,7 +43,14 @@ func (this *VotesController) CreateVote(writer http.ResponseWriter, request *htt
 	writer.WriteHeader(200)
 }
 
+func (this *VotesController) AddOption(writer http.ResponseWriter, request *http.Request) {
+	id := mux.Vars(request)["id"]
+
+	fmt.Print("AddOption called with ", id);
+}
+
 func configureRoutes(controller *VotesController) {
 	routeRegistry.Register("/votes", routeRegistry.GET, controller.GetAllVotes)
 	routeRegistry.Register("/votes", routeRegistry.POST, controller.CreateVote)
+	routeRegistry.Register("/votes/{id:" + goExtensions.UUIDRegEx + "}", routeRegistry.GET, controller.AddOption)
 }
