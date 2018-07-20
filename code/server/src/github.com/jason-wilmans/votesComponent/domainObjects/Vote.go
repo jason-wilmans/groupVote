@@ -1,4 +1,4 @@
-package entities
+package domainObjects
 
 import (
 	"github.com/satori/go.uuid"
@@ -10,11 +10,11 @@ type Vote struct {
 	Name string
 }
 
-func New(name string) Vote {
+func NewVote(name string) *Vote {
 	precond.True(len(name) > 0, "")
 
 	id, _ := uuid.NewV4()
-	return Vote{id, name}
+	return &Vote{id, name}
 }
 
 func (this *Vote) GetId() uuid.UUID {
