@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from "./infrastructure/app-routing/app-routing-module";
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
@@ -14,14 +15,21 @@ import {MatButtonModule} from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { VoteEditorComponent } from './votes/vote-editor/vote-editor.component';
 import { VoteListerComponent } from './votes/vote-lister/vote-lister.component';
+import { OptionEditorComponent } from './votes/option-editor/option-editor.component';
+import { VoteOverviewComponent } from './votes/vote-overview/vote-overview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VoteEditorComponent,
-    VoteListerComponent
+    VoteListerComponent,
+    OptionEditorComponent,
+    VoteOverviewComponent
   ],
   imports: [
+    AppRoutingModule,
+    BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatFormFieldModule,

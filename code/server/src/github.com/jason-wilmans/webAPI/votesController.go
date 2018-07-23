@@ -9,15 +9,14 @@ import (
 	"github.com/jason-wilmans/infrastructure/routeRegistry"
 	"github.com/jason-wilmans/votesComponent"
 	"github.com/gorilla/mux"
-	"fmt"
 	"github.com/jason-wilmans/infrastructure/goExtensions"
 )
 
 type VotesController struct {
-	voteComponent *votesComponent.VotesComponent
+	voteComponent *votesComponent.VoteComponent
 }
 
-func NewVoteController(voteComponent *votesComponent.VotesComponent) *VotesController {
+func NewVoteController(voteComponent *votesComponent.VoteComponent) *VotesController {
 	precond.NotNil(voteComponent, "")
 
 	controller := &VotesController{voteComponent}
@@ -37,7 +36,12 @@ func (this *VotesController) CreateVote(writer http.ResponseWriter, request *htt
 	log.Println("Save a vote requested.")
 
 	var vote domainObjects.Vote
-	_ = json.NewDecoder(request.Body).Decode(&vote)
+	err := json.NewDecoder(request.Body).Decode(&vote)
+
+	if err != nil {
+		writer.WriteHeader(400)
+		return
+	}
 
 	this.voteComponent.Create(&vote)
 	writer.WriteHeader(200)
@@ -46,11 +50,22 @@ func (this *VotesController) CreateVote(writer http.ResponseWriter, request *htt
 func (this *VotesController) AddOption(writer http.ResponseWriter, request *http.Request) {
 	id := mux.Vars(request)["id"]
 
-	fmt.Print("AddOption called with ", id);
+	log.Println("AddOption called with " + id)
+
+	var option domainObjects.Option
+	err := json.NewDecoder(request.Body).Decode(&option)
+
+	if err != nil {
+		writer.WriteHeader(400)
+		return
+	}
+
+	this.voteComponent.AddOption(&option)
+	writer.WriteHeader(200)
 }
 
 func configureRoutes(controller *VotesController) {
 	routeRegistry.Register("/votes", routeRegistry.GET, controller.GetAllVotes)
 	routeRegistry.Register("/votes", routeRegistry.POST, controller.CreateVote)
-	routeRegistry.Register("/votes/{id:" + goExtensions.UUIDRegEx + "}", routeRegistry.GET, controller.AddOption)
+	routeRegistry.Register("/votes/{id:" + goExtensions.UUIDRegEx + "}", routeRegistry.POST, controller.AddOption)
 }

@@ -6,26 +6,29 @@ import (
 	"github.com/jason-wilmans/votesComponent/repositories"
 )
 
-type VotesComponent struct {
+type VoteComponent struct {
 	voteUC *useCases.VoteUC
 	optionUC *useCases.OptionUC
 }
 
-func New() *VotesComponent {
+func New() *VoteComponent {
 	votesRepository := repositories.NewVoteRepository()
 	optionRepository := repositories.NewOptionRepository()
 
 	voteUC := useCases.NewVoteUC(votesRepository)
 	optionUC := useCases.NewOptionUC(optionRepository, voteUC)
 
-	return &VotesComponent{voteUC, optionUC}
+	return &VoteComponent{voteUC, optionUC}
 }
 
-func (this *VotesComponent) Create(vote *domainObjects.Vote) {
+func (this *VoteComponent) Create(vote *domainObjects.Vote) {
 	this.voteUC.Create(vote)
 }
 
-func (this *VotesComponent) GetAll() []*domainObjects.Vote {
+func (this *VoteComponent) GetAll() []*domainObjects.Vote {
 	return this.voteUC.GetAll()
 }
 
+func (this *VoteComponent) AddOption(option *domainObjects.Option) {
+	this.optionUC.AddOption(option)
+}

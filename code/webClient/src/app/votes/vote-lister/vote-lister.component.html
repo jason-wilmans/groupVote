@@ -2,6 +2,8 @@
   <h3 mat-subheader>Running Votes</h3>
   <mat-list-item *ngFor="let vote of Votes">
     <mat-icon mat-list-icon>folder</mat-icon>
-    <h4 mat-line>{{vote.Name}}</h4>
+    <h4 mat-line>
+      <a href="#" [routerLink]="[vote.Id, 'options']">{{vote.Name}}</a>
+    </h4>
   </mat-list-item>
 </mat-list>

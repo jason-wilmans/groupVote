@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {VoteService} from "../model/vote-service";
-import {Vote} from "../model/vote";
+import {VoteService} from "../../model/vote-service";
+import {Vote} from "../../model/vote";
 import {contract} from "typedcontract";
 
 @Component({
