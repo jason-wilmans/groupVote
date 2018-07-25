@@ -19,15 +19,16 @@ func NewOptionUC(repository *repositories.OptionRepository, voteUC *VoteUC) *Opt
 	return &OptionUC{repository, voteUC}
 }
 
-func (this *OptionUC) AddOption(option *domainObjects.Option) {
-	precond.NotNil(option, "")
-	precond.False(this.repository.Exists(option.GetId()), "")
-	precond.True(this.voteUC.Exists(option.GetVoteId()), "")
+func (this *OptionUC) AddOption(toAdd *domainObjects.Option) {
+	precond.NotNil(toAdd, "")
+	precond.False(this.repository.Exists(toAdd.GetId()), "")
+	precond.True(this.voteUC.Exists(toAdd.GetVoteId()), "")
 
+	option := domainObjects.NewOption(toAdd.VoteId, toAdd.GetName(), toAdd.GetDescription())
 	this.repository.Save(option)
 }
 
-func (this *OptionUC) GetAllByVoteId(voteId uuid.UUID) []*domainObjects.Option  {
+func (this *OptionUC) GetAllForVoteId(voteId uuid.UUID) []*domainObjects.Option  {
 	precond.True(this.voteUC.Exists(voteId), "")
 
 	return this.repository.GetAllByVoteId(voteId)

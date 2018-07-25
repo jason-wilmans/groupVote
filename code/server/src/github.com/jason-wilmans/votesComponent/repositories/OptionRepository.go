@@ -21,15 +21,16 @@ func (this *OptionRepository) Save(option *domainObjects.Option) {
 	this.options = append(this.options, option)
 }
 
-func (this *OptionRepository) GetAllByVoteId(id uuid.UUID) []*domainObjects.Option {
-	precond.NotNil(id, "")
+func (this *OptionRepository) GetAllByVoteId(voteId uuid.UUID) []*domainObjects.Option {
+	precond.NotNil(voteId, "")
 
 	var filteredOptions []*domainObjects.Option
 	for _, option := range this.options {
-		if uuid.Equal(option.GetId(), id) {
+		if uuid.Equal(option.GetVoteId(), voteId) {
 			filteredOptions = append(filteredOptions, option)
 		}
 	}
+
 	return filteredOptions
 }
 

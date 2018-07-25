@@ -29,7 +29,7 @@ func NewVoteController(voteComponent *votesComponent.VoteComponent) *VotesContro
 func (this *VotesController) GetAllVotes(writer http.ResponseWriter, request *http.Request) {
 	log.Println("All votes requested.")
 
-	votes := this.voteComponent.GetAll()
+	votes := this.voteComponent.GetAllVotes()
 	log.Println("Currently has ", len(votes), " votes")
 	json.NewEncoder(writer).Encode(votes)
 }
@@ -90,9 +90,25 @@ func (this *VotesController) AddOption(writer http.ResponseWriter, request *http
 	writer.WriteHeader(http.StatusOK)
 }
 
+func (this *VotesController) GetOptionsForVote(writer http.ResponseWriter, request *http.Request) {
+	idString := mux.Vars(request)["id"]
+	log.Println("All options for vote ", idString, " requested.")
+
+	id, err := uuid.FromString(idString)
+	if err != nil {
+		writer.WriteHeader(http.StatusBadRequest)
+		fmt.Fprintln(writer, err)
+		return
+	}
+
+	options := this.voteComponent.GetAllOptionsFor(id)
+	json.NewEncoder(writer).Encode(options)
+}
+
 func configureRoutes(controller *VotesController) {
 	routeRegistry.Register("/votes", routeRegistry.GET, controller.GetAllVotes)
 	routeRegistry.Register("/votes", routeRegistry.POST, controller.CreateVote)
 	routeRegistry.Register("/votes/{id:" + domainObjects2.EntityIdRegex+ "}", routeRegistry.GET, controller.GetVote)
 	routeRegistry.Register("/votes/{id:" + domainObjects2.EntityIdRegex+ "}/options", routeRegistry.PUT, controller.AddOption)
+	routeRegistry.Register("/votes/{id:" + domainObjects2.EntityIdRegex+ "}/options", routeRegistry.GET, controller.GetOptionsForVote)
 }

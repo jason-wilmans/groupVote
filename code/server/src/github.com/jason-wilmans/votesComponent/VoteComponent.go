@@ -26,13 +26,18 @@ func (this *VoteComponent) Create(vote *domainObjects.Vote) {
 	this.voteUC.Create(vote)
 }
 
-func (this *VoteComponent) GetAll() []*domainObjects.Vote {
+func (this *VoteComponent) GetVote(id uuid.UUID) *domainObjects.Vote {
+	return this.voteUC.Get(id)
+}
+
+func (this *VoteComponent) GetAllVotes() []*domainObjects.Vote {
 	return this.voteUC.GetAll()
 }
 
 func (this *VoteComponent) AddOption(option *domainObjects.Option) {
 	this.optionUC.AddOption(option)
 }
-func (this *VoteComponent) GetVote(id uuid.UUID) *domainObjects.Vote {
-	return this.voteUC.Get(id)
+
+func (this *VoteComponent) GetAllOptionsFor(voteId uuid.UUID) []*domainObjects.Option {
+	return this.optionUC.GetAllForVoteId(voteId)
 }
