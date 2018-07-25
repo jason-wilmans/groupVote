@@ -26,7 +26,7 @@ func (this *OptionRepository) GetAllByVoteId(voteId uuid.UUID) []*domainObjects.
 
 	var filteredOptions []*domainObjects.Option
 	for _, option := range this.options {
-		if uuid.Equal(option.GetVoteId(), voteId) {
+		if uuid.Equal(option.GetTemplateId(), voteId) {
 			filteredOptions = append(filteredOptions, option)
 		}
 	}

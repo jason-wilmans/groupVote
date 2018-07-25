@@ -9,10 +9,10 @@ import (
 
 type OptionUC struct {
 	repository *repositories.OptionRepository
-	voteUC *VoteUC
+	templateUC *TemplateUC
 }
 
-func NewOptionUC(repository *repositories.OptionRepository, voteUC *VoteUC) *OptionUC {
+func NewOptionUC(repository *repositories.OptionRepository, voteUC *TemplateUC) *OptionUC {
 	precond.NotNil(repository, "")
 	precond.NotNil(voteUC, "")
 
@@ -22,14 +22,14 @@ func NewOptionUC(repository *repositories.OptionRepository, voteUC *VoteUC) *Opt
 func (this *OptionUC) AddOption(toAdd *domainObjects.Option) {
 	precond.NotNil(toAdd, "")
 	precond.False(this.repository.Exists(toAdd.GetId()), "")
-	precond.True(this.voteUC.Exists(toAdd.GetVoteId()), "")
+	precond.True(this.templateUC.Exists(toAdd.GetTemplateId()), "")
 
-	option := domainObjects.NewOption(toAdd.VoteId, toAdd.GetName(), toAdd.GetDescription())
+	option := domainObjects.NewOption(toAdd.TemplateId, toAdd.GetName(), toAdd.GetDescription())
 	this.repository.Save(option)
 }
 
 func (this *OptionUC) GetAllForVoteId(voteId uuid.UUID) []*domainObjects.Option  {
-	precond.True(this.voteUC.Exists(voteId), "")
+	precond.True(this.templateUC.Exists(voteId), "")
 
 	return this.repository.GetAllByVoteId(voteId)
 }

@@ -8,7 +8,7 @@ import (
 )
 
 type VoteComponent struct {
-	voteUC *useCases.VoteUC
+	voteUC *useCases.TemplateUC
 	optionUC *useCases.OptionUC
 }
 

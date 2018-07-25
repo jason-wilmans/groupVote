@@ -8,7 +8,7 @@ import {Template} from "../../model/template";
   styleUrls: ['./vote-lister.component.css']
 })
 export class VoteListerComponent implements OnInit {
-  public Votes : Template[];
+  public Templates: Template[];
 
   constructor(
     private voteService: VoteService
@@ -19,7 +19,7 @@ export class VoteListerComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.Votes = await this.voteService.GetAllVotes();
+    this.Templates = await this.voteService.GetAllTemplates();
   }
 
 }

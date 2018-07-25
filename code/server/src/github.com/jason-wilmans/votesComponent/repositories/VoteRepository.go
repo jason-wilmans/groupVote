@@ -7,7 +7,7 @@ import (
 )
 
 type VoteRepository struct {
-	votes []*domainObjects.Template
+	templates []*domainObjects.Template
 }
 
 func NewVoteRepository() *VoteRepository {
@@ -18,15 +18,15 @@ func NewVoteRepository() *VoteRepository {
 func (this *VoteRepository) Save(vote *domainObjects.Template) {
 	precond.NotNil(vote, "")
 
-	this.votes = append(this.votes, vote)
+	this.templates = append(this.templates, vote)
 }
 
 func (this *VoteRepository) GetAll() []*domainObjects.Template {
-	return this.votes
+	return this.templates
 }
 
 func (this *VoteRepository) Exists(id uuid.UUID) bool {
-	for _, vote := range this.votes {
+	for _, vote := range this.templates {
 		if vote.GetId() == id {
 			return true
 		}
@@ -35,7 +35,7 @@ func (this *VoteRepository) Exists(id uuid.UUID) bool {
 	return false
 }
 func (this *VoteRepository) Get(id uuid.UUID) *domainObjects.Template {
-	for _, vote := range this.votes {
+	for _, vote := range this.templates {
 		if vote.GetId() == id {
 			return vote
 		}

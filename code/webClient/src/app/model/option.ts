@@ -1,11 +1,11 @@
 export class Option {
   private readonly Id: string;
-  private readonly VoteId: string;
+  private readonly TemplateId: string;
   private Name: string;
   private Description: string;
 
-  constructor(voteId: string, name: string, description?: string, id?: string) {
-    this.VoteId = voteId;
+  constructor(templateId: string, name: string, description?: string, id?: string) {
+    this.TemplateId = templateId;
     this.Name = name;
     this.Description = description;
     if(id) {
@@ -17,8 +17,8 @@ export class Option {
     return this.Id;
   }
 
-  public GetVoteId(): string {
-    return this.VoteId;
+  public GetTemplateId(): string {
+    return this.TemplateId;
   }
 
   public SetName(name: string) {

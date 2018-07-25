@@ -21,7 +21,7 @@ export class VoteService {
     this.VotesChanged.emit();
   }
 
-  public async GetAllVotes() : Promise<Template[]> {
+  public async GetAllTemplates() : Promise<Template[]> {
     return this.http
       .get<Template[]>("http://localhost:8080/templates")
       .toPromise();
@@ -41,7 +41,7 @@ export class VoteService {
 
   public AddOption(option: Option) : Promise<void> {
     return this.http
-      .put<void>("http://localhost:8080/templates/" + option.GetVoteId() + "/options", option)
+      .put<void>("http://localhost:8080/templates/" + option.GetTemplateId() + "/options", option)
       .toPromise();
   }
 
