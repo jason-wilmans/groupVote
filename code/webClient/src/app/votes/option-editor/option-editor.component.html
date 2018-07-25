@@ -8,7 +8,7 @@
     </div>
     <div>
       <mat-form-field>
-        <textarea matInput  [(ngModel)]="Description" placeholder="Description"></textarea>
+        <textarea matInput [(ngModel)]="Description" placeholder="Description"></textarea>
       </mat-form-field>
     </div>
 
@@ -16,5 +16,19 @@
       <button mat-raised-button color="primary" (click)="OnAddOptionClicked()">Add Option</button>
     </div>
 
+  </mat-card-content>
+</mat-card>
+
+<br>
+
+<mat-card>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let option of Options">
+        <mat-icon mat-list-icon>assignment</mat-icon>
+        <h4 mat-line>{{option.Name}}</h4>
+        <p mat-line>{{option.Description}}</p>
+      </mat-list-item>
+    </mat-list>
   </mat-card-content>
 </mat-card>

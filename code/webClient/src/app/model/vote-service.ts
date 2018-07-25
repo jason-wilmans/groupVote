@@ -44,4 +44,10 @@ export class VoteService {
       .put<void>("http://localhost:8080/votes/" + option.GetVoteId() + "/options", option)
       .toPromise();
   }
+
+  async GetAllOptions(voteId: string) : Promise<Option[]> {
+    return this.http
+      .get<Option[]>("http://localhost:8080/votes/" + voteId + "/options")
+      .toPromise();
+  }
 }
