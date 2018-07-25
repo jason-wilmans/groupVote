@@ -17,6 +17,7 @@ import { VoteEditorComponent } from './votes/vote-editor/vote-editor.component';
 import { VoteListerComponent } from './votes/vote-lister/vote-lister.component';
 import { OptionEditorComponent } from './votes/option-editor/option-editor.component';
 import { VoteOverviewComponent } from './votes/vote-overview/vote-overview.component';
+import { VoteViewerComponent } from './votes/vote-viewer/vote-viewer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { VoteOverviewComponent } from './votes/vote-overview/vote-overview.compo
     VoteEditorComponent,
     VoteListerComponent,
     OptionEditorComponent,
-    VoteOverviewComponent
+    VoteOverviewComponent,
+    VoteViewerComponent
   ],
   imports: [
     AppRoutingModule,

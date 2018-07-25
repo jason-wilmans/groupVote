@@ -3,7 +3,7 @@ import {Option} from "./option";
 
 export class Vote {
   private readonly Id: string;
-  private Name: string;
+  public Name: string;
   private Options: Option[];
 
   constructor(name: string, id?: string) {
