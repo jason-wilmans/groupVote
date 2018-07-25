@@ -7,23 +7,24 @@ import (
 )
 
 type Option struct {
-	Id			uuid.UUID
-	VoteId		uuid.UUID
+	Id			string
+	VoteId		string
 	Name		string
 	Description string
 }
 
-func NewOption(voteId uuid.UUID, name string, description string) *Option {
+func NewOption(voteId string, name string, description string) *Option {
 	precond.NotNil(voteId, "")
 	precond.NotNil(name, "")
 	precond.True(goExtensions.IsNonWhitespaceWithMinimumLength(name, 1), "")
 
 	id, _ := uuid.NewV4()
-	return &Option{id, voteId,name,	description}
+	return &Option{id.String(), voteId,name,	description}
 }
 
 func (this *Option) GetId() uuid.UUID {
-	return this.Id
+	id, _ := uuid.FromString(this.Id)
+	return id
 }
 
 func (this *Option) SetName(name string) {
@@ -40,4 +41,9 @@ func (this *Option) SetDescription(description string) {
 
 func (this *Option) GetDescription() string {
 	return this.Description
+}
+
+func (this *Option) GetVoteId() uuid.UUID {
+	id, _ := uuid.FromString(this.VoteId)
+	return id
 }

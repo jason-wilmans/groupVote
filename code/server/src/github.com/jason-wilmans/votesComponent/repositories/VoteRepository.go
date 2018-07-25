@@ -34,3 +34,12 @@ func (this *VoteRepository) Exists(id uuid.UUID) bool {
 
 	return false
 }
+func (this *VoteRepository) Get(id uuid.UUID) *domainObjects.Vote {
+	for _, vote := range this.votes {
+		if vote.GetId() == id {
+			return vote
+		}
+	}
+
+	return nil
+}

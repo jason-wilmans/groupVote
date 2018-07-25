@@ -2,12 +2,10 @@ package goExtensions
 
 import "unicode"
 
-const UUIDRegEx = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89AB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"
-
 func IsNonWhitespaceWithMinimumLength(value string, minimumLength int) bool {
 	var nonWhitespace = 0
-	for _, rune := range value {
-		if !unicode.IsSpace(rune) {
+	for _, char := range value {
+		if !unicode.IsSpace(char) {
 			nonWhitespace += 1
 		}
 

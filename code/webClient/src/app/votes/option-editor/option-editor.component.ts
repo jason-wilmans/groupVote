@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {VoteService} from "../../model/vote-service";
+import {Option} from "../../model/option";
 
 @Component({
   selector: 'app-option-editor',
@@ -7,7 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OptionEditorComponent implements OnInit {
 
-  constructor() { }
+  private Name: string;
+  private Description: string;
+
+  constructor(
+    private voteService: VoteService,
+    private route: ActivatedRoute
+  ) { }
+
+  async OnAddOptionClicked() {
+    let voteId = this.route.snapshot.paramMap.get('id');
+    const option: Option = new Option(voteId, this.Name, this.Description);
+    console.log("sending: ", option);
+    await this.voteService.AddOption(option);
+  }
 
   ngOnInit() {
   }

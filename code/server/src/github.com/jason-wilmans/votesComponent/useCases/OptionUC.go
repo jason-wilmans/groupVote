@@ -21,8 +21,8 @@ func NewOptionUC(repository *repositories.OptionRepository, voteUC *VoteUC) *Opt
 
 func (this *OptionUC) AddOption(option *domainObjects.Option) {
 	precond.NotNil(option, "")
-	precond.False(this.repository.Exists(option.Id), "")
-	precond.True(this.voteUC.Exists(option.VoteId), "")
+	precond.False(this.repository.Exists(option.GetId()), "")
+	precond.True(this.voteUC.Exists(option.GetVoteId()), "")
 
 	this.repository.Save(option)
 }

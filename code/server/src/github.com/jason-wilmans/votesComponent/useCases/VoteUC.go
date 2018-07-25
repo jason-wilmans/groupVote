@@ -29,4 +29,7 @@ func (this VoteUC) Create(toCreate *domainObjects.Vote) {
 func (this *VoteUC) Exists(voteId uuid.UUID) bool {
 	return this.repository.Exists(voteId)
 }
+func (this *VoteUC) Get(id uuid.UUID) *domainObjects.Vote {
+	return this.repository.Get(id)
+}
 

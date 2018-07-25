@@ -4,6 +4,7 @@ import (
 	"github.com/jason-wilmans/votesComponent/useCases"
 	"github.com/jason-wilmans/votesComponent/domainObjects"
 	"github.com/jason-wilmans/votesComponent/repositories"
+	"github.com/satori/go.uuid"
 )
 
 type VoteComponent struct {
@@ -31,4 +32,7 @@ func (this *VoteComponent) GetAll() []*domainObjects.Vote {
 
 func (this *VoteComponent) AddOption(option *domainObjects.Option) {
 	this.optionUC.AddOption(option)
+}
+func (this *VoteComponent) GetVote(id uuid.UUID) *domainObjects.Vote {
+	return this.voteUC.Get(id)
 }
