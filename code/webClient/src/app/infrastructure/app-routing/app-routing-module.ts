@@ -5,10 +5,10 @@ import {VoteOverviewComponent} from "../../votes/vote-overview/vote-overview.com
 import {VoteViewerComponent} from "../../votes/vote-viewer/vote-viewer.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'votes', pathMatch: 'full' },
-  { path: 'votes', component: VoteOverviewComponent },
-  { path: 'votes/:id', component: VoteViewerComponent },
-  { path: 'votes/:id/options', component: OptionEditorComponent }
+  { path: '', redirectTo: 'templates', pathMatch: 'full' },
+  { path: 'templates', component: VoteOverviewComponent },
+  { path: 'templates/:id', component: VoteViewerComponent },
+  { path: 'templates/:id/options', component: OptionEditorComponent }
 ];
 
 @NgModule({

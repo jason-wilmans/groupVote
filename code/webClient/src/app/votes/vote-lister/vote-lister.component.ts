@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {VoteService} from "../../model/vote-service";
-import {Vote} from "../../model/vote";
+import {Template} from "../../model/template";
 
 @Component({
   selector: 'app-vote-lister',
@@ -8,7 +8,7 @@ import {Vote} from "../../model/vote";
   styleUrls: ['./vote-lister.component.css']
 })
 export class VoteListerComponent implements OnInit {
-  public Votes : Vote[];
+  public Votes : Template[];
 
   constructor(
     private voteService: VoteService

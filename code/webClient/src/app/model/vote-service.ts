@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from "@angular/core";
-import {Vote} from "./vote";
+import {Template} from "./template";
 import {HttpClient} from "@angular/common/http";
 import {Option} from "./option";
 
@@ -13,41 +13,41 @@ export class VoteService {
     private http: HttpClient
   ) {}
 
-  public async Create(vote: Vote) {
+  public async Create(template: Template) {
     await this.http
-      .post<Vote>("http://localhost:8080/votes", vote)
+      .post<Template>("http://localhost:8080/templates", template)
       .toPromise();
 
     this.VotesChanged.emit();
   }
 
-  public async GetAllVotes() : Promise<Vote[]> {
+  public async GetAllVotes() : Promise<Template[]> {
     return this.http
-      .get<Vote[]>("http://localhost:8080/votes")
+      .get<Template[]>("http://localhost:8080/templates")
       .toPromise();
   }
 
-  public async Get(id: string) : Promise<Vote> {
+  public async Get(id: string) : Promise<Template> {
     return this.http
-      .get<Vote>("http://localhost:8080/votes/" + id)
+      .get<Template>("http://localhost:8080/templates/" + id)
       .toPromise();
   }
 
-  async Save(vote: Vote) : Promise<void> {
+  async Save(vote: Template) : Promise<void> {
     return this.http
-      .post<void>("http://localhost:8080/votes/" + vote.GetId(), vote)
+      .post<void>("http://localhost:8080/templates/" + vote.GetId(), vote)
       .toPromise();
   }
 
   public AddOption(option: Option) : Promise<void> {
     return this.http
-      .put<void>("http://localhost:8080/votes/" + option.GetVoteId() + "/options", option)
+      .put<void>("http://localhost:8080/templates/" + option.GetVoteId() + "/options", option)
       .toPromise();
   }
 
-  async GetAllOptions(voteId: string) : Promise<Option[]> {
+  async GetAllOptions(templateId: string) : Promise<Option[]> {
     return this.http
-      .get<Option[]>("http://localhost:8080/votes/" + voteId + "/options")
+      .get<Option[]>("http://localhost:8080/templates/" + templateId + "/options")
       .toPromise();
   }
 }

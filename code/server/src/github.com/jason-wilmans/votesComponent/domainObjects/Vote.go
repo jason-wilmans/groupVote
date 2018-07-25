@@ -5,29 +5,29 @@ import (
 	"github.com/muroc/prego"
 )
 
-type Vote struct {
+type Template struct {
 	Id   uuid.UUID
 	Name string
 }
 
-func NewVote(name string) *Vote {
+func NewTemplate(name string) *Template {
 	precond.True(len(name) > 0, "")
 
 	id, _ := uuid.NewV4()
-	return &Vote{id, name}
+	return &Template{id, name}
 }
 
-func (this *Vote) GetId() uuid.UUID {
+func (this *Template) GetId() uuid.UUID {
 	return this.Id
 }
 
-func (this *Vote) SetName(name string) {
+func (this *Template) SetName(name string) {
 	precond.NotNil(name, "")
 	precond.True(len(name) > 0, "")
 
 	this.Name = name
 }
 
-func (this *Vote) GetName() string {
+func (this *Template) GetName() string {
 	return this.Name
 }

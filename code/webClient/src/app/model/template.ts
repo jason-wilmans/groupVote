@@ -1,7 +1,7 @@
 import {UUID} from "uuid";
 import {Option} from "./option";
 
-export class Vote {
+export class Template {
   private readonly Id: string;
   public Name: string;
   private Options: Option[];

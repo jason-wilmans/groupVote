@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class VoteViewerComponent implements OnInit {
 
-  private VoteId: string | null;
+  private TemplateId: string | null;
   private Name: string;
   private Options: Option[];
 
@@ -20,13 +20,12 @@ export class VoteViewerComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.VoteId = this.route.snapshot.paramMap.get('id');
+    this.TemplateId = this.route.snapshot.paramMap.get('id');
 
-    if (this.VoteId) {
-      const vote = await this.voteService.Get(this.VoteId);
+    if (this.TemplateId) {
+      const vote = await this.voteService.Get(this.TemplateId);
       this.Name = vote.Name;
-      this.Options = await this.voteService.GetAllOptions(this.VoteId)
+      this.Options = await this.voteService.GetAllOptions(this.TemplateId)
     }
   }
-
 }

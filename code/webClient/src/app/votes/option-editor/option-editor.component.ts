@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {VoteService} from "../../model/vote-service";
 import {Option} from "../../model/option";
 
@@ -12,21 +12,22 @@ export class OptionEditorComponent implements OnInit {
 
   private Name: string;
   private Description: string;
-  private VoteId: string | null;
-
+  private TemplateId: string | null;
 
   constructor(
+    private router: Router,
     private voteService: VoteService,
     private route: ActivatedRoute
   ) { }
 
   async OnAddOptionClicked() {
-    const option: Option = new Option(this.VoteId, this.Name, this.Description);
+    const option: Option = new Option(this.TemplateId, this.Name, this.Description);
     await this.voteService.AddOption(option);
+    await this.router.navigateByUrl("/templates/" + this.TemplateId);
   }
 
   async ngOnInit() {
-    this.VoteId = this.route.snapshot.paramMap.get('id');
+    this.TemplateId = this.route.snapshot.paramMap.get('id');
   }
 
 }

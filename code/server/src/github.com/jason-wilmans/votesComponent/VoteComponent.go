@@ -22,15 +22,15 @@ func New() *VoteComponent {
 	return &VoteComponent{voteUC, optionUC}
 }
 
-func (this *VoteComponent) Create(vote *domainObjects.Vote) {
+func (this *VoteComponent) Create(vote *domainObjects.Template) {
 	this.voteUC.Create(vote)
 }
 
-func (this *VoteComponent) GetVote(id uuid.UUID) *domainObjects.Vote {
+func (this *VoteComponent) GetTemplate(id uuid.UUID) *domainObjects.Template {
 	return this.voteUC.Get(id)
 }
 
-func (this *VoteComponent) GetAllVotes() []*domainObjects.Vote {
+func (this *VoteComponent) GetAllTemplates() []*domainObjects.Template {
 	return this.voteUC.GetAll()
 }
 

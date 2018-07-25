@@ -26,18 +26,18 @@ func NewVoteController(voteComponent *votesComponent.VoteComponent) *VotesContro
 	return controller
 }
 
-func (this *VotesController) GetAllVotes(writer http.ResponseWriter, request *http.Request) {
+func (this *VotesController) GetAllTemplates(writer http.ResponseWriter, request *http.Request) {
 	log.Println("All votes requested.")
 
-	votes := this.voteComponent.GetAllVotes()
+	votes := this.voteComponent.GetAllTemplates()
 	log.Println("Currently has ", len(votes), " votes")
 	json.NewEncoder(writer).Encode(votes)
 }
 
-func (this *VotesController) CreateVote(writer http.ResponseWriter, request *http.Request) {
+func (this *VotesController) CreateTemplate(writer http.ResponseWriter, request *http.Request) {
 	log.Println("Save a vote requested.")
 
-	var vote domainObjects.Vote
+	var vote domainObjects.Template
 	err := json.NewDecoder(request.Body).Decode(&vote)
 
 	if err != nil {
@@ -49,9 +49,9 @@ func (this *VotesController) CreateVote(writer http.ResponseWriter, request *htt
 	writer.WriteHeader(http.StatusOK)
 }
 
-func (this *VotesController) GetVote(writer http.ResponseWriter, request *http.Request) {
+func (this *VotesController) GetTemplate(writer http.ResponseWriter, request *http.Request) {
 	idString := mux.Vars(request)["id"]
-	log.Println("Vote with id", idString, "requested.")
+	log.Println("Template with id", idString, "requested.")
 
 	id, err := uuid.FromString(idString)
 	if err != nil {
@@ -60,7 +60,7 @@ func (this *VotesController) GetVote(writer http.ResponseWriter, request *http.R
 		return
 	}
 
-	vote := this.voteComponent.GetVote(id)
+	vote := this.voteComponent.GetTemplate(id)
 
 	err = json.NewEncoder(writer).Encode(vote)
 	if err != nil {
@@ -90,7 +90,7 @@ func (this *VotesController) AddOption(writer http.ResponseWriter, request *http
 	writer.WriteHeader(http.StatusOK)
 }
 
-func (this *VotesController) GetOptionsForVote(writer http.ResponseWriter, request *http.Request) {
+func (this *VotesController) GetOptionsForTemplate(writer http.ResponseWriter, request *http.Request) {
 	idString := mux.Vars(request)["id"]
 	log.Println("All options for vote ", idString, " requested.")
 
@@ -106,9 +106,9 @@ func (this *VotesController) GetOptionsForVote(writer http.ResponseWriter, reque
 }
 
 func configureRoutes(controller *VotesController) {
-	routeRegistry.Register("/votes", routeRegistry.GET, controller.GetAllVotes)
-	routeRegistry.Register("/votes", routeRegistry.POST, controller.CreateVote)
-	routeRegistry.Register("/votes/{id:" + domainObjects2.EntityIdRegex+ "}", routeRegistry.GET, controller.GetVote)
-	routeRegistry.Register("/votes/{id:" + domainObjects2.EntityIdRegex+ "}/options", routeRegistry.PUT, controller.AddOption)
-	routeRegistry.Register("/votes/{id:" + domainObjects2.EntityIdRegex+ "}/options", routeRegistry.GET, controller.GetOptionsForVote)
+	routeRegistry.Register("/templates", routeRegistry.GET, controller.GetAllTemplates)
+	routeRegistry.Register("/templates", routeRegistry.POST, controller.CreateTemplate)
+	routeRegistry.Register("/templates/{id:" + domainObjects2.EntityIdRegex+ "}", routeRegistry.GET, controller.GetTemplate)
+	routeRegistry.Register("/templates/{id:" + domainObjects2.EntityIdRegex+ "}/options", routeRegistry.PUT, controller.AddOption)
+	routeRegistry.Register("/templates/{id:" + domainObjects2.EntityIdRegex+ "}/options", routeRegistry.GET, controller.GetOptionsForTemplate)
 }

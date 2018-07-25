@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {VoteService} from "../../model/vote-service";
-import {Vote} from "../../model/vote";
+import {Template} from "../../model/template";
 import {contract} from "typedcontract";
 
 @Component({
@@ -23,7 +23,7 @@ export class VoteEditorComponent {
   public async OnCreateVoteClicked() {
     contract.In(this.CanCreate).isTrue();
 
-    const vote = new Vote(this.Name);
+    const vote = new Template(this.Name);
     await this.voteService.Create(vote);
     this.Name = '';
   }

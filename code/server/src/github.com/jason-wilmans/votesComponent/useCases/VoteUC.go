@@ -15,21 +15,21 @@ func NewVoteUC(repository *repositories.VoteRepository) *VoteUC {
 	return &VoteUC{repository}
 }
 
-func (this VoteUC) GetAll() []*domainObjects.Vote {
+func (this VoteUC) GetAll() []*domainObjects.Template {
 	return this.repository.GetAll()
 }
 
-func (this VoteUC) Create(toCreate *domainObjects.Vote) {
-	precond.False(this.repository.Exists(toCreate.Id), "Vote with this id already exists.")
+func (this VoteUC) Create(toCreate *domainObjects.Template) {
+	precond.False(this.repository.Exists(toCreate.Id), "Template with this id already exists.")
 
-	vote := domainObjects.NewVote(toCreate.GetName())
+	vote := domainObjects.NewTemplate(toCreate.GetName())
 	this.repository.Save(vote)
 }
 
 func (this *VoteUC) Exists(voteId uuid.UUID) bool {
 	return this.repository.Exists(voteId)
 }
-func (this *VoteUC) Get(id uuid.UUID) *domainObjects.Vote {
+func (this *VoteUC) Get(id uuid.UUID) *domainObjects.Template {
 	return this.repository.Get(id)
 }
 
