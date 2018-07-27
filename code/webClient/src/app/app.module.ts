@@ -13,20 +13,20 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 
 import { AppComponent } from './app.component';
-import { VoteEditorComponent } from './votes/vote-editor/vote-editor.component';
-import { VoteListerComponent } from './votes/vote-lister/vote-lister.component';
-import { OptionEditorComponent } from './votes/option-editor/option-editor.component';
-import { VoteOverviewComponent } from './votes/vote-overview/vote-overview.component';
-import { VoteViewerComponent } from './votes/vote-viewer/vote-viewer.component';
+import { TemplateEditorComponent } from './templates/template-editor/template-editor.component';
+import { TemplateListerComponent } from './templates/template-lister/template-lister.component';
+import { OptionEditorComponent } from './templates/option-editor/option-editor.component';
+import { TemplateOverviewComponent } from './templates/template-overview/template-overview.component';
+import { TemplateViewerComponent } from './templates/template-viewer/template-viewer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VoteEditorComponent,
-    VoteListerComponent,
+    TemplateEditorComponent,
+    TemplateListerComponent,
     OptionEditorComponent,
-    VoteOverviewComponent,
-    VoteViewerComponent
+    TemplateOverviewComponent,
+    TemplateViewerComponent
   ],
   imports: [
     AppRoutingModule,

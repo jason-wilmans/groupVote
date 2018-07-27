@@ -4,11 +4,11 @@ import {Template} from "../../model/template";
 import {contract} from "typedcontract";
 
 @Component({
-  selector: 'app-vote-editor',
-  templateUrl: './vote-editor.component.html',
-  styleUrls: ['./vote-editor.component.css']
+  selector: 'app-template-editor',
+  templateUrl: './template-editor.component.html',
+  styleUrls: ['./template-editor.component.css']
 })
-export class VoteEditorComponent {
+export class TemplateEditorComponent {
 
   public Name: string;
   private CanCreate: boolean;

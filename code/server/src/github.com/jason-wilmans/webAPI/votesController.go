@@ -27,10 +27,10 @@ func NewVoteController(voteComponent *votesComponent.VoteComponent) *VotesContro
 }
 
 func (this *VotesController) GetAllTemplates(writer http.ResponseWriter, request *http.Request) {
-	log.Println("All votes requested.")
+	log.Println("All templates requested.")
 
 	votes := this.voteComponent.GetAllTemplates()
-	log.Println("Currently has ", len(votes), " votes")
+	log.Println("Currently has ", len(votes), " templates")
 	json.NewEncoder(writer).Encode(votes)
 }
 

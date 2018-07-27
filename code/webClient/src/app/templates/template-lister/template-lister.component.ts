@@ -3,11 +3,11 @@ import {VoteService} from "../../model/vote-service";
 import {Template} from "../../model/template";
 
 @Component({
-  selector: 'app-vote-lister',
-  templateUrl: './vote-lister.component.html',
-  styleUrls: ['./vote-lister.component.css']
+  selector: 'app-template-lister',
+  templateUrl: './template-lister.component.html',
+  styleUrls: ['./template-lister.component.css']
 })
-export class VoteListerComponent implements OnInit {
+export class TemplateListerComponent implements OnInit {
   public Templates: Template[];
 
   constructor(

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import {OptionEditorComponent} from "../../votes/option-editor/option-editor.component";
+import {OptionEditorComponent} from "../../templates/option-editor/option-editor.component";
 import {RouterModule, Routes} from "@angular/router";
-import {VoteOverviewComponent} from "../../votes/vote-overview/vote-overview.component";
-import {VoteViewerComponent} from "../../votes/vote-viewer/vote-viewer.component";
+import {TemplateOverviewComponent} from "../../templates/template-overview/template-overview.component";
+import {TemplateViewerComponent} from "../../templates/template-viewer/template-viewer.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'templates', pathMatch: 'full' },
-  { path: 'templates', component: VoteOverviewComponent },
-  { path: 'templates/:id', component: VoteViewerComponent },
+  { path: 'templates', component: TemplateOverviewComponent },
+  { path: 'templates/:id', component: TemplateViewerComponent },
   { path: 'templates/:id/options', component: OptionEditorComponent }
 ];
 

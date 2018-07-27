@@ -28,7 +28,7 @@ func (this *OptionUC) AddOption(toAdd *domainObjects.Option) {
 	this.repository.Save(option)
 }
 
-func (this *OptionUC) GetAllForVoteId(voteId uuid.UUID) []*domainObjects.Option  {
+func (this *OptionUC) GetAllForTemplateId(voteId uuid.UUID) []*domainObjects.Option  {
 	precond.True(this.templateUC.Exists(voteId), "")
 
 	return this.repository.GetAllByVoteId(voteId)

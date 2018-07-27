@@ -4,11 +4,11 @@ import {VoteService} from "../../model/vote-service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-vote-viewer',
-  templateUrl: './vote-viewer.component.html',
-  styleUrls: ['./vote-viewer.component.css']
+  selector: 'app-template-viewer',
+  templateUrl: './template-viewer.component.html',
+  styleUrls: ['./template-viewer.component.css']
 })
-export class VoteViewerComponent implements OnInit {
+export class TemplateViewerComponent implements OnInit {
 
   private TemplateId: string | null;
   private Name: string;
