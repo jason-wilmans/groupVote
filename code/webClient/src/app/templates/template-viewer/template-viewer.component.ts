@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Option} from "../../model/option";
 import {VoteService} from "../../model/vote-service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-template-viewer',
@@ -16,7 +16,8 @@ export class TemplateViewerComponent implements OnInit {
 
   constructor(
     private voteService: VoteService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   async ngOnInit() {
@@ -27,5 +28,10 @@ export class TemplateViewerComponent implements OnInit {
       this.Name = vote.Name;
       this.Options = await this.voteService.GetAllOptions(this.TemplateId)
     }
+  }
+
+  private async CreateTournament() {
+    const tournament = await this.voteService.CreateNewTournament(this.TemplateId);
+    console.log("tournament:", tournament);
   }
 }

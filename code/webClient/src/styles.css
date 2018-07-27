@@ -4,3 +4,32 @@
   color: #cccccc;
 }
 
+.pageMenu {
+  border: 0px;
+  margin-bottom: 4em;
+  height: auto;
+}
+
+/* not in use atm
+.pageMenu ul {
+  border: 0px;
+  list-style-type: none;
+  overflow: visible;
+}
+
+.pageMenu li {
+  float: left;
+  margin-right: 2em;
+}
+
+.pageMenu li a {
+  display: contents;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.pageMenu li a:hover {
+  background-color: #111111;
+}
+*/

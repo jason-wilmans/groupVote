@@ -5,6 +5,8 @@ import (
 	"github.com/jason-wilmans/votesComponent/domainObjects"
 	"time"
 	"math/rand"
+	"github.com/muroc/prego"
+	"log"
 )
 
 type TournamentUC struct {
@@ -20,7 +22,7 @@ func NewTournamentUC(optionUC *OptionUC) *TournamentUC {
 	return &TournamentUC{tournaments, optionUC, random}
 }
 
-func (this *TournamentUC) StartTournament(templateId uuid.UUID) *domainObjects.Tournament {
+func (this *TournamentUC) CreateTournament(templateId uuid.UUID) *domainObjects.Tournament {
 	options	:= this.optionUC.GetAllForTemplateId(templateId)
 	matches := createInitialMatches(options, this.random)
 	tournament := domainObjects.NewTournament(matches)
@@ -28,8 +30,16 @@ func (this *TournamentUC) StartTournament(templateId uuid.UUID) *domainObjects.T
 	return tournament
 }
 
+func (this *TournamentUC) GetTournament(tournamentId uuid.UUID) *domainObjects.Tournament {
+	precond.NotNil(tournamentId, "")
+
+	return this.tournaments[tournamentId]
+}
+
 func createInitialMatches(options []*domainObjects.Option, random *rand.Rand) []*domainObjects.Match {
 	nrOfOptions := len(options)
+	precond.True(nrOfOptions > 0, "")
+
 	nrOfMatches := calculateNumberOfMatches(nrOfOptions)
 
 	matches := make([]*domainObjects.Match, 0)
@@ -39,24 +49,40 @@ func createInitialMatches(options []*domainObjects.Option, random *rand.Rand) []
 	}
 
 	for _, option := range options {
-		placeOptionInRandomMatch(option, matches, random)
+		matchIndex := getFreeRandomMatch(matches, random)
+		matches[matchIndex].Join(option.GetId())
+		log.Println("used index ", matchIndex)
 	}
+
 	return matches
 }
 
 func calculateNumberOfMatches(numberOfOptions int) int {
 	numberOfMatches := 1
-	for numberOfMatches < numberOfOptions {
+	correctedHalf := (numberOfOptions / 2) + (numberOfOptions % 2)
+	for numberOfMatches < correctedHalf {
 		numberOfMatches = numberOfMatches * 2
 	}
 	return numberOfMatches
 }
 
-func placeOptionInRandomMatch(option *domainObjects.Option, matches []*domainObjects.Match, random *rand.Rand) {
+func getFreeRandomMatch(matches []*domainObjects.Match, random *rand.Rand) int {
 	nrOfMatches := len(matches)
-	randomIndex := random.Intn(nrOfMatches)
+
+	randomIndex := getRandomIndex(nrOfMatches, random)
 	for !matches[randomIndex].HasRoom() {
-		randomIndex = random.Intn(nrOfMatches)
+		if nrOfMatches == 1 {
+			panic("Something went horribly wrong :(")
+		}
+		randomIndex = getRandomIndex(nrOfMatches, random)
 	}
-	matches[randomIndex].Join(option.GetId())
+	return randomIndex
+}
+
+func getRandomIndex(nrOfMatches int, random *rand.Rand) int {
+	if nrOfMatches > 1 {
+		return random.Intn(nrOfMatches)
+	} else {
+		return 0
+	}
 }

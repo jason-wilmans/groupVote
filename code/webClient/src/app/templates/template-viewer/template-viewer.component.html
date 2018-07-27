@@ -1,9 +1,16 @@
 <mat-card>
   <mat-card-content>
     <h1>{{Name}}</h1>
-    <button [routerLink]="['options']" mat-fab color="primary">
-      <mat-icon mat-list-icon>note_add</mat-icon>
-    </button>
+    <div class="pageMenu">
+      <button [routerLink]="['options']" mat-fab color="primary">
+        <mat-icon mat-list-icon>note_add</mat-icon>
+      </button>
+      <button (click)="CreateTournament()" mat-fab color="accent">
+        <mat-icon mat-list-icon>supervisor_account</mat-icon>
+      </button>
+    </div>
+
+    <!-- <mat-divider></mat-divider> -->
     <mat-list>
       <mat-list-item *ngFor="let option of Options">
         <mat-icon mat-list-icon>assignment</mat-icon>

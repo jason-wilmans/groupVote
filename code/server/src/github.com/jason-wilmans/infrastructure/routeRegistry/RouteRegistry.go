@@ -44,6 +44,7 @@ func Register(path string, method int, handler http.HandlerFunc) {
 
 func enableCORS(path string, handler http.HandlerFunc) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		log.Println("REQUEST:", r.RequestURI, "[", r.Method, "]")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		w.Header().Set("Access-Control-Allow-Methods", listMethods(path))

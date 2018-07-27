@@ -8,8 +8,8 @@ import (
 )
 
 type VoteComponent struct {
-	voteUC *useCases.TemplateUC
-	optionUC *useCases.OptionUC
+	templateUC   *useCases.TemplateUC
+	optionUC     *useCases.OptionUC
 	tournamentUC *useCases.TournamentUC
 }
 
@@ -25,15 +25,15 @@ func New() *VoteComponent {
 }
 
 func (this *VoteComponent) Create(vote *domainObjects.Template) {
-	this.voteUC.Create(vote)
+	this.templateUC.Create(vote)
 }
 
 func (this *VoteComponent) GetTemplate(id uuid.UUID) *domainObjects.Template {
-	return this.voteUC.Get(id)
+	return this.templateUC.Get(id)
 }
 
 func (this *VoteComponent) GetAllTemplates() []*domainObjects.Template {
-	return this.voteUC.GetAll()
+	return this.templateUC.GetAll()
 }
 
 func (this *VoteComponent) AddOption(option *domainObjects.Option) {
@@ -42,4 +42,13 @@ func (this *VoteComponent) AddOption(option *domainObjects.Option) {
 
 func (this *VoteComponent) GetAllOptionsFor(voteId uuid.UUID) []*domainObjects.Option {
 	return this.optionUC.GetAllForTemplateId(voteId)
+}
+func (this *VoteComponent) CreateTournamentFromTemplate(templateId uuid.UUID) *domainObjects.Tournament {
+	return this.tournamentUC.CreateTournament(templateId)
+}
+func (this *VoteComponent) GetTournament(tournamentId uuid.UUID) *domainObjects.Tournament {
+	return this.tournamentUC.GetTournament(tournamentId)
+}
+func (this *VoteComponent) TemplateExists(templateId uuid.UUID) bool {
+	return this.templateUC.Exists(templateId)
 }

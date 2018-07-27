@@ -3,7 +3,7 @@ package domainObjects
 import (
 	"github.com/satori/go.uuid"
 	"github.com/muroc/prego"
-)
+	)
 
 type Tournament struct {
 	Id		string
@@ -19,13 +19,14 @@ func NewTournament(matches []*Match) *Tournament {
 		panic(err)
 	}
 
-	return &Tournament{id.String(), matches}
+	idString := id.String()
+	return &Tournament{idString, matches}
 }
 
 func (this *Tournament) GetId() uuid.UUID {
 	id, err := uuid.FromString(this.Id)
 	if err != nil {
-		return id
+		panic(err)
 	}
-	panic("Couldn't convert id.")
+	return id
 }

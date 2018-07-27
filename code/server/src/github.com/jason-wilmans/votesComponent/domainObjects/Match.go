@@ -37,3 +37,11 @@ func (this *Match) Join(competitorId uuid.UUID) {
 
 	this.CompetitorBId = competitorId.String()
 }
+
+func (this *Match) GetA() string {
+	return this.CompetitorAId
+}
+
+func (this *Match) GetB() string {
+	return this.CompetitorBId
+}

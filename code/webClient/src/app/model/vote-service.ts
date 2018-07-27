@@ -2,6 +2,7 @@ import {EventEmitter, Injectable} from "@angular/core";
 import {Template} from "./template";
 import {HttpClient} from "@angular/common/http";
 import {Option} from "./option";
+import {Tournament} from "./Tournament";
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,12 @@ export class VoteService {
   async GetAllOptions(templateId: string) : Promise<Option[]> {
     return this.http
       .get<Option[]>("http://localhost:8080/templates/" + templateId + "/options")
+      .toPromise();
+  }
+
+  CreateNewTournament(templateId: string) : Promise<Tournament>{
+    return this.http
+      .post<Tournament>("http://localhost:8080/templates/" + templateId + "/tournaments", "")
       .toPromise();
   }
 }
