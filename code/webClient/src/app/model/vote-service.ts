@@ -57,4 +57,16 @@ export class VoteService {
       .post<Tournament>("http://localhost:8080/templates/" + templateId + "/tournaments", "")
       .toPromise();
   }
+
+  async GetTournament(tournamentId: string) : Promise<Tournament> {
+    return this.http
+      .get<Tournament>("http://localhost:8080/tournaments/" + tournamentId)
+      .toPromise();
+  }
+
+  async EnterTournament(name: string, tournamentId: string) : Promise<void> {
+    return this.http
+      .put<void>("http://localhost:8080/tournaments/" + tournamentId + "/voters", name)
+      .toPromise();
+  }
 }

@@ -7,19 +7,34 @@ import (
 
 type Match struct {
 	Id				string
+	TournamentId	string
+	Level			int
+	Index			int
 	CompetitorAId	string
 	CompetitorBId	string
 	Started			bool
 	Finished		bool
 }
 
-func NewMatch() *Match {
+func NewMatch(tournamentId uuid.UUID, level int, index int) *Match {
+	precond.NotNil(tournamentId, "")
+	precond.True(level >= 0, "")
+	precond.True(index >= 0, "")
+
 	id, err := uuid.NewV4()
 	if err != nil {
 		panic(err)
 	}
 
-	return &Match{id.String(), "", "", false, false}
+	return &Match{id.String(), tournamentId.String(), level, index,"", "", false, false}
+}
+
+func (this *Match) GetId() uuid.UUID {
+	id, err := uuid.FromString(this.Id)
+	if err != nil {
+		panic(err)
+	}
+	return id
 }
 
 func (this *Match) HasRoom() bool {

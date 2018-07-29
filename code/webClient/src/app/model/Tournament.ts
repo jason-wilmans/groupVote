@@ -1,8 +1,6 @@
-import {Match} from "./Match";
-
 export class Tournament {
-  private Id: string ;
-  private Matches: Match[];
+  public Id: string;
+  public TemplateId: string;
 
   constructor(
   ) {

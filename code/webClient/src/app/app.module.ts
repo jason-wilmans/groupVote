@@ -18,6 +18,7 @@ import { TemplateListerComponent } from './templates/template-lister/template-li
 import { OptionEditorComponent } from './templates/option-editor/option-editor.component';
 import { TemplateOverviewComponent } from './templates/template-overview/template-overview.component';
 import { TemplateViewerComponent } from './templates/template-viewer/template-viewer.component';
+import { TournamentLobbyComponent } from './voting/tournament-lobby/tournament-lobby.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TemplateViewerComponent } from './templates/template-viewer/template-vi
     TemplateListerComponent,
     OptionEditorComponent,
     TemplateOverviewComponent,
-    TemplateViewerComponent
+    TemplateViewerComponent,
+    TournamentLobbyComponent
   ],
   imports: [
     AppRoutingModule,

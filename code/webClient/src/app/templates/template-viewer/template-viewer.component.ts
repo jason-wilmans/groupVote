@@ -24,14 +24,14 @@ export class TemplateViewerComponent implements OnInit {
     this.TemplateId = this.route.snapshot.paramMap.get('id');
 
     if (this.TemplateId) {
-      const vote = await this.voteService.Get(this.TemplateId);
-      this.Name = vote.Name;
+      const template = await this.voteService.Get(this.TemplateId);
+      this.Name = template.Name;
       this.Options = await this.voteService.GetAllOptions(this.TemplateId)
     }
   }
 
   private async CreateTournament() {
     const tournament = await this.voteService.CreateNewTournament(this.TemplateId);
-    console.log("tournament:", tournament);
+    await this.router.navigateByUrl("/tournaments/" + tournament.Id + "/lobby");
   }
 }

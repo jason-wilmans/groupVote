@@ -114,11 +114,6 @@ func (this *VotesController) CreateTournamentFromTemplate(writer http.ResponseWr
 }
 
 func (this *VotesController) GetTournament(writer http.ResponseWriter, request *http.Request) {
-	_, err := routeRegistry.ReadIdParam("templateId", writer, request)
-	if err != nil {
-		return
-	}
-
 	tournamentId, err := routeRegistry.ReadIdParam("tournamentId", writer, request)
 	if err != nil {
 		return

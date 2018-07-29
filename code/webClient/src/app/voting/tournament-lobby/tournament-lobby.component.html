@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-content>
+    <h1>{{Name}}</h1>
+    <div class="pageMenu">
+      <button (click)="EnterTournament()" [disabled]="AlreadyHasId" mat-fab color="primary">
+        <mat-icon mat-list-icon>supervisor_account</mat-icon>
+      </button>
+      <button (click)="CreateTournament()" mat-fab color="accent">
+        <mat-icon mat-list-icon>play_arrow</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
